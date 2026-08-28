@@ -23,34 +23,40 @@ namespace ExDrone1
             Console.Clear();
             Console.SetCursorPosition(posX, posY);
 
-            while (battery > 0)
+            do
             {
-                drawDrone(drone, battery, posX, posY);
+                Console.Clear();
+                drawDrone(drone, deadDrone, deathMessage, battery, posX, posY);
 
-                changeState(ref battery, ref posX, ref posY);
+                changeDroneState(ref battery, ref posX, ref posY);
 
                 Thread.Sleep(150);
-                Console.Clear();
-            }
-            Console.SetCursorPosition(posX, posY);
-            Console.WriteLine(deadDrone);
-            Console.SetCursorPosition(posX, posY - 1);
-            Console.WriteLine(deathMessage);
-            Console.ReadLine();
+                
+            } while (battery >= 0);            
+            Console.Read();
 
         }
 
-        static void drawDrone(string drone, double battery, int posX, int posY)
+        static void drawDrone(string drone, string deadDrone, string deathMessage, double battery, int posX, int posY)
         {
             Console.SetCursorPosition(posX, posY);
-            Console.Write(drone);
+            if (battery >= 2)
+            {
+                Console.Write(drone);
+                Console.SetCursorPosition(posX, posY - 1);
+                Console.Write(battery + "%");
+            }
 
-            Console.SetCursorPosition(posX, posY - 1);
-            Console.Write(battery + "%");
+            else
+            {
+                Console.Write(deadDrone);
+                Console.SetCursorPosition(posX, posY - 1);
+                Console.WriteLine(deathMessage);
+            }
 
         }
 
-        static void changeState(ref double battery, ref int posX, ref int posY)
+        static void changeDroneState(ref double battery, ref int posX, ref int posY)
         {
             posX++;
             battery = battery - 2;
