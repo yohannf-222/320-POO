@@ -42,7 +42,7 @@ namespace ExDrone1
         {
             foreach (Drone d in drones)
             {
-                if (d._battery > 0) return true;
+                if (d.Battery > 0) return true;
             }
             return false;
         }

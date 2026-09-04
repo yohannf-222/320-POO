@@ -9,12 +9,13 @@ namespace ExDrone1
 {
     public class Drone
     {
-        public int _battery;
+        private int _battery;
         private int _posX;
         private int _posY;
         private string _drone;
         private string _deadDrone;
-        public string _droneState;
+
+        public int Battery { get => _battery; }
 
         public Drone(int battery, int posX, int posY, string drone)
         {
@@ -25,7 +26,7 @@ namespace ExDrone1
             this._deadDrone = "_____";
         }
 
-        public Drone()
+        public Drone() 
         {
             this._battery = 50;
             this._posX = 0;
@@ -37,18 +38,11 @@ namespace ExDrone1
         public void drawDrone()
         {
             Console.SetCursorPosition(this._posX, this._posY);
-
-            if (GetDroneState(_battery) == "normal")
+            if (this.Battery > 0)
             {
                 Console.Write(_drone);
                 Console.SetCursorPosition(this._posX, this._posY - 1);
-                Console.Write(this._battery + "%");
-            }
-            else if (GetDroneState(_battery) == "exploded")
-            {
-                Console.Write("XXXX");
-                Console.SetCursorPosition(this._posX, this._posY - 1);
-                Console.WriteLine("Blew up for techncal reasons");
+                Console.Write(this.Battery + "%");
             }
             else
             {
@@ -60,23 +54,10 @@ namespace ExDrone1
 
         public void changeDroneState()
         {
-            if (this._battery <= 0) return;
+            if (this.Battery <= 0) return;
 
-            this._battery = this._battery - 2;
+            this._battery = this.Battery - 2;
             this._posX++;
-        }
-
-        string GetDroneState(int battery)
-        {
-            if (_battery <= 0) return "empty";
-
-            Random random = new Random();
-            int randomNumber = random.Next(1, 10);
-            if (randomNumber == 1)
-            {
-                return "exploded";
-            }
-            return "normal";
         }
     }
 }
