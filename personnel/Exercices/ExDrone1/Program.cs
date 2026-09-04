@@ -12,54 +12,39 @@ namespace ExDrone1
         static void Main(string[] args)
         {
 
-            string drone = "x-O-x";
-            string deadDrone = "_____";
-            string deathMessage = "battery low";
-            double battery = 50;
-            int posX = 0;
-            int posY = 5;
-
             Console.CursorVisible = false;
             Console.Clear();
-            Console.SetCursorPosition(posX, posY);
+            Drone[] drones = {
+            new Drone(),
+            new Drone(60,   3,    4,    "0=x=0"),
+            new Drone(40,   10,   6,    "X-0-X"),
+            new Drone(45,   0,    8,    "X--X"),
+            new Drone(20,   21,   10,   "O-A-O"),
+            new Drone(80,   5,    12,   ">-0-<")};
 
-            do
+            Drone drone1 = new Drone();
+            while (isOneDroneAlive(drones))
             {
                 Console.Clear();
-                drawDrone(drone, deadDrone, deathMessage, battery, posX, posY);
+                foreach (Drone d in drones)
+                {
+                    d.changeDroneState();
+                    d.drawDrone();
+                }
+                Thread.Sleep(200);
 
-                changeDroneState(ref battery, ref posX, ref posY);
-
-                Thread.Sleep(150);
-                
-            } while (battery >= 0);            
+            }
             Console.Read();
 
         }
 
-        static void drawDrone(string drone, string deadDrone, string deathMessage, double battery, int posX, int posY)
+        static bool isOneDroneAlive(Drone[] drones)
         {
-            Console.SetCursorPosition(posX, posY);
-            if (battery >= 2)
+            foreach (Drone d in drones)
             {
-                Console.Write(drone);
-                Console.SetCursorPosition(posX, posY - 1);
-                Console.Write(battery + "%");
+                if (d._battery > 0) return true;
             }
-
-            else
-            {
-                Console.Write(deadDrone);
-                Console.SetCursorPosition(posX, posY - 1);
-                Console.WriteLine(deathMessage);
-            }
-
-        }
-
-        static void changeDroneState(ref double battery, ref int posX, ref int posY)
-        {
-            posX++;
-            battery = battery - 2;
+            return false;
         }
     }
 }
