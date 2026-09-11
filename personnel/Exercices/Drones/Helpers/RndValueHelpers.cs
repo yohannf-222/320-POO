@@ -8,7 +8,6 @@ namespace Drones.Helpers
 {
     internal static class RndValueHelpers
     {
-        private static Random alea= new Random();   
-
+        public static Random alea = new Random();   
     }
 }
