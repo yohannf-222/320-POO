@@ -18,7 +18,7 @@ namespace Drones
             this.x = x;
             this.y = y;
             this.name = name;
-            RndValueHelpers.alea.Next(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
+            this.charge = RndValueHelpers.alea.Next(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
         }
 
         #region ================ Modelisation du drone et de son comportement ================
