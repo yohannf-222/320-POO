@@ -6,10 +6,10 @@ namespace Drones
     // Cette partie de la classe Drone définit ce qu'est un drone par un modèle numérique
     public partial class Drone
     {
-        public int charge { get; private set; };                    // La charge actuelle de la batterie
-        public string name { get; private set; };                   // Un nom
-        public int x { get; private set; };                         // Position en X depuis la gauche de l'espace aérien
-        public int y { get; private set; };                         // Position en Y depuis le haut de l'espace aérien
+        private int charge;                    // La charge actuelle de la batterie
+        private string name;                   // Un nom
+        private int x;                         // Position en X depuis la gauche de l'espace aérien
+        private int y;                         // Position en Y depuis le haut de l'espace aérien
 
         // Constructeur
         public Drone(int x, int y, string name)
