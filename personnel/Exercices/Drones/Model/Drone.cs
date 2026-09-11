@@ -6,10 +6,10 @@ namespace Drones
     // Cette partie de la classe Drone définit ce qu'est un drone par un modèle numérique
     public partial class Drone
     {
-        public int charge;                            // La charge actuelle de la batterie
-        public string name;                           // Un nom
-        public int x;                                 // Position en X depuis la gauche de l'espace aérien
-        public int y;                                 // Position en Y depuis le haut de l'espace aérien
+        public int charge { get; private set; };                    // La charge actuelle de la batterie
+        public string name { get; private set; };                   // Un nom
+        public int x { get; private set; };                         // Position en X depuis la gauche de l'espace aérien
+        public int y { get; private set; };                         // Position en Y depuis le haut de l'espace aérien
 
         // Constructeur
         public Drone(int x, int y, string name)
@@ -44,7 +44,7 @@ namespace Drones
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(charge > 0 ? Resources.drone : Resources.boom, x-Drone.SIZE/2, y - Drone.SIZE / 2, Drone.SIZE, Drone.SIZE);
+            drawingSpace.Graphics.DrawImage(charge > 0 ? Resources.drone : Resources.boom, x - Drone.SIZE / 2, y - Drone.SIZE / 2, Drone.SIZE, Drone.SIZE);
             drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, x + 5, y - 25);
         }
 
