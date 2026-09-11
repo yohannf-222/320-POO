@@ -8,7 +8,7 @@ namespace Drones.Helpers
 {
     internal class Config
     {
-        public static int MAX_LOAD = 1000; 
+        public static int MAX_LOAD = 1000;
         public static int AIRSPACE_WIDTH = 1200;
         public static int AIRSPACE_HEIGHT = 600;
 

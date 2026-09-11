@@ -10,11 +10,12 @@ namespace Drones
         private string _name;                   // Un nom
         private int _x;                         // Position en X depuis la gauche de l'espace aérien
         private int _y;                         // Position en Y depuis le haut de l'espace aérien
+        private int _destinationX;              // Detination en X depuis la gauche de l'espace aérien
+        private int _destinationY;              // Detination en Y depuis le haut de l'espace aérien
 
         // Constructeur
         public Drone(int x, int y, string name)
-        {
-            Random alea = new Random();
+        {            
             this._x = x;
             this._y = y;
             this._name = name;
@@ -27,10 +28,9 @@ namespace Drones
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            if (_charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger
-            Random alea = new Random();
+            if (_charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger            
             _x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
-            _y += alea.Next(-2, 3);                     // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
+            _y += RndValueHelpers.alea.Next(-2, 3);                     // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             _charge--;                                  // Il a dépensé de l'énergie
         }
 
