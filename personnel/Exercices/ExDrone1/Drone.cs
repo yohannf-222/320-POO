@@ -26,7 +26,7 @@ namespace ExDrone1
             this._deadDrone = "_____";
         }
 
-        public Drone() 
+        public Drone()
         {
             this._battery = 50;
             this._posX = 0;
