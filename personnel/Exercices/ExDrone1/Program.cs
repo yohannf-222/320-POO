@@ -11,34 +11,32 @@ namespace ExDrone1
     {
         static void Main(string[] args)
         {
-
             Console.CursorVisible = false;
-            Console.Clear();
-            Drone[] drones = {
-            new Drone(),
-            new Drone(60,   3,    4,    "0=x=0"),
-            new Drone(40,   10,   6,    "X-0-X"),
-            new Drone(45,   0,    8,    "X--X"),
-            new Drone(20,   21,   10,   "O-A-O"),
-            new Drone(80,   5,    12,   ">-0-<")};
 
-            Drone drone1 = new Drone();
-            while (isOneDroneAlive(drones))
+            List<Drone> fleet = new List<Drone>();
+
+            fleet.Add(new Drone());
+            fleet.Add(new Drone(60, 3, 4, "0=x=0"));
+            fleet.Add(new Drone(40, 10, 6, "X-0-X"));
+            fleet.Add(new Drone(45, 0, 8, "X--X"));
+            fleet.Add(new Drone(20, 21, 10, "O-A-O"));
+            fleet.Add(new Drone(55, 5, 12, ">-0-<"));
+
+
+            while (isOneDroneAlive(fleet))
             {
                 Console.Clear();
-                foreach (Drone d in drones)
+                foreach (Drone d in fleet)
                 {
                     d.changeDroneState();
                     d.drawDrone();
                 }
-                Thread.Sleep(200);
-
+                Thread.Sleep(100);
             }
             Console.Read();
-
         }
 
-        static bool isOneDroneAlive(Drone[] drones)
+        static bool isOneDroneAlive(List<Drone> drones)
         {
             foreach (Drone d in drones)
             {

@@ -56,7 +56,7 @@ namespace ExDrone1
         {
             if (this.Battery <= 0) return;
 
-            this._battery = this.Battery - 2;
+            this._battery = this._battery - 2;
             this._posX++;
         }
     }
