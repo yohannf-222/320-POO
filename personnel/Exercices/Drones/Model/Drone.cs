@@ -28,10 +28,22 @@ namespace Drones
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            if (_charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger            
-            _x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
-            _y += RndValueHelpers.alea.Next(-2, 3);                     // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            _charge--;                                  // Il a dépensé de l'énergie
+            if (_charge <= 0) return;                           // S'il n'a plus de charge, il ne peut plus bouger                        
+
+            if (_x == _destinationX && _y == _destinationY)  // S'il est déjà arrivé à destination, il change de destination
+            {
+                _destinationX = RndValueHelpers.alea.Next(Config.AIRSPACE_WIDTH);
+                _destinationY = RndValueHelpers.alea.Next(Config.AIRSPACE_HEIGHT);                
+            }
+
+            double deltaX = _destinationX - _x;
+            double deltaY = _destinationY - _y;
+            double distance = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+            double step = (double)Config.SPEED * interval / 1000;   // Distance parcourue pendant l'intervalle,vitesse constante
+            _x += (int)(deltaX / distance * step);
+            _y += (int)(deltaY / distance * step);
+
+            _charge--;                                          // Il a dépensé de l'énergie
         }
 
         #endregion

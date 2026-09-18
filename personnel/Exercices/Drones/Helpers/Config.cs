@@ -12,5 +12,7 @@ namespace Drones.Helpers
         public static int AIRSPACE_WIDTH = 1200;
         public static int AIRSPACE_HEIGHT = 600;
 
+        public static int SPEED = 10;
+
     }
 }
