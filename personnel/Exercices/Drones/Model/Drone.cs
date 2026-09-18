@@ -6,12 +6,15 @@ namespace Drones
     // Cette partie de la classe Drone définit ce qu'est un drone par un modèle numérique
     public partial class Drone
     {
-        private int _charge;                    // La charge actuelle de la batterie
-        private string _name;                   // Un nom
-        private double _x;                         // Position en X depuis la gauche de l'espace aérien
-        private double _y;                         // Position en Y depuis le haut de l'espace aérien
+        private int _charge;                        // La charge actuelle de la batterie
+        private string _name;                       // Un nom
+        private double _x;                          // Position en X depuis la gauche de l'espace aérien
+        private double _y;                          // Position en Y depuis le haut de l'espace aérien
         private double _targetX = RndValueHelpers.alea.Next(Config.AIRSPACE_WIDTH);            // Detination en X depuis la gauche de l'espace aérien
         private double _targetY = RndValueHelpers.alea.Next(Config.AIRSPACE_HEIGHT);           // Detination en Y depuis le haut de l'espace aérien
+        private State _state;  
+        
+        public enum State { CRASH, LOW_BATTERY, LOADING, ROAMING };        
 
         // Constructeur
         public Drone(int x, int y, string name)
@@ -20,6 +23,7 @@ namespace Drones
             this._y = y;
             this._name = name;
             this._charge = RndValueHelpers.alea.Next(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
+            this._state = State.ROAMING;
         }
 
         #region ================ Modelisation du drone et de son comportement ================
@@ -29,18 +33,23 @@ namespace Drones
         public void Update(int interval)
         {
             if (_charge <= 0) return;                                 // S'il n'a plus de charge, il ne peut plus bouger                        
-            
+
             if (MathHelpers.CalculateDistance(_x, _y, _targetX, _targetY) <= Config.SPEED * interval / 1000)           // L'objectif est atteint (ou tout proche)
             {
                 _x = _targetX;
                 _y = _targetY;
-                _targetX = RndValueHelpers.alea.Next(Config.AIRSPACE_WIDTH);
-                _targetY = RndValueHelpers.alea.Next(Config.AIRSPACE_HEIGHT);
+
+                if (_state == State.ROAMING)
+                { 
+                    _targetX = RndValueHelpers.alea.Next(Config.AIRSPACE_WIDTH);
+                    _targetY = RndValueHelpers.alea.Next(Config.AIRSPACE_HEIGHT);
+                }
+               
                 return;                                             // Le drone s'immobilise
             }
 
             double deltaX = _targetX - _x;
-            double deltaY = _targetY - _y;            
+            double deltaY = _targetY - _y;
             double distance = MathHelpers.CalculateDistance(_x, _y, _targetX, _targetY);
             double step = (double)Config.SPEED * interval / 1000;   // Distance parcourue pendant l'intervalle,vitesse constante
             _x += Convert.ToInt32(deltaX / distance * step);
@@ -52,7 +61,7 @@ namespace Drones
         void CheckTarget()
         {
 
-        }        
+        }
         #endregion
 
         #region  ================ Rendu graphique  ================
