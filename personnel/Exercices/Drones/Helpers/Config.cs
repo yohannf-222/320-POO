@@ -11,6 +11,7 @@ namespace Drones.Helpers
         public static int MAX_LOAD = 1000;
         public static int AIRSPACE_WIDTH = 1200;
         public static int AIRSPACE_HEIGHT = 600;
+        public static int LOW_BATTERY_LIMIT = MAX_LOAD /100 * 20;
 
         public static int SPEED = 100;
 
