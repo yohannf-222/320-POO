@@ -21,9 +21,10 @@ namespace Drones
             Charger charger = new Charger(Config.AIRSPACE_WIDTH / 2, Config.AIRSPACE_HEIGHT / 2);
 
             List<Pizzeria> pizzerias = new List<Pizzeria>(Pizzeria.GeneratePizzerias(5));
+            List<Client> clients = new List<Client>(Client.GenerateClients(20));
 
             // Démarrage
-            Application.Run(new AirSpace(fleet, charger, pizzerias));
+            Application.Run(new AirSpace(fleet, charger, pizzerias, clients));
         }
     }
 }
