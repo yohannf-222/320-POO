@@ -18,16 +18,16 @@ namespace Drones
         public enum State { CRASH, LOW_BATTERY, LOADING, ROAMING };
 
 
-        public int Charge 
-        { 
+        public int Charge
+        {
             get => _charge;
-            set 
-            { 
-                if (value > Config.MAX_LOAD) 
+            set
+            {
+                if (value > Config.MAX_LOAD)
                     _charge = Config.MAX_LOAD;
                 else
-                    _charge = value;             
-                
+                    _charge = value;
+
             }
         }
 
@@ -57,7 +57,7 @@ namespace Drones
                         Charge = Config.MAX_LOAD;
 
                     Charge += 10;
-                }                    
+                }
                 else
                     _state = State.ROAMING;
 
@@ -108,6 +108,26 @@ namespace Drones
 
         }
 
+        public static List<Drone> GenerateFleet(int nb)
+        {
+            if (nb > 8) nb = 8;
+
+            List<Drone> fleet = new List<Drone>();
+            string[] names = { "Joe",
+                 "Peter",
+                 "Cleveland",
+                 "Lois",
+                 "Meg",
+                 "Quagmire",
+                 "Chris",
+                 "Stewie" };                    //noms possibles
+
+            for (int i = 0; i < nb; i++)
+            {
+                fleet.Add(new Drone(RndValueHelpers.alea.Next(Config.AIRSPACE_WIDTH), RndValueHelpers.alea.Next(Config.AIRSPACE_HEIGHT), names[RndValueHelpers.alea.Next(names.Length)]));
+            }
+            return fleet;
+        }
         void CheckTarget()
         {
 
@@ -117,7 +137,7 @@ namespace Drones
         #region  ================ Rendu graphique  ================
 
         private const int SIZE = 50;
-        private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);        
+        private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
 
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
