@@ -22,9 +22,6 @@ namespace Drones.Model
             this.Name = name;
         }
 
-
-        private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
-
         public int X
         {
             get => _x;
@@ -67,7 +64,7 @@ namespace Drones.Model
 
             for (int i = 0; i < nb; i++)
             {
-                pizzerias.Add(new Pizzeria(RndValueHelpers.alea.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2), RndValueHelpers.alea.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2), $"Pizzeria{i}"));
+                pizzerias.Add(new Pizzeria(RndValueHelpers.alea.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2), RndValueHelpers.alea.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2), $"Pizzeria{i + 1}"));
             }
             return pizzerias;
         }
