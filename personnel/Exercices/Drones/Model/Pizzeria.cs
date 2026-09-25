@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Drones.Model
 {
     public class Pizzeria
-    {        
+    {
         private int _x;
         private int _y;
         private string _name;
@@ -25,18 +25,18 @@ namespace Drones.Model
 
         private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
 
-        public int X 
-        { 
-            get => _x; 
-            set 
-            { 
+        public int X
+        {
+            get => _x;
+            set
+            {
                 if (value >= Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2)
                     _x = Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2;
                 else if (value <= Config.PIZZERIA_SIDE_LENGTH / 2)
                     _x = Config.PIZZERIA_SIDE_LENGTH / 2;
                 else
-                    _x = value; 
-            } 
+                    _x = value;
+            }
         }
         public int Y
         {
