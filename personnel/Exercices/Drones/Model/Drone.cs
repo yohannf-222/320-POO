@@ -108,6 +108,11 @@ namespace Drones
 
         }
 
+        /// <summary>
+        /// Crée une liste de drone de longueur nb, jusqu'à 8
+        /// </summary>
+        /// <param name="nb"> le nombre de drones dans la liste</param>
+        /// <returns></returns>
         public static List<Drone> GenerateFleet(int nb)
         {
             if (nb > 8) nb = 8;
@@ -128,6 +133,7 @@ namespace Drones
             }
             return fleet;
         }
+
         void CheckTarget()
         {
 
