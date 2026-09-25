@@ -15,5 +15,7 @@ namespace Drones.Helpers
 
         public static int SPEED = 100;
 
+        public static int PIZZERIA_SIDE_LENGTH = 50;
+
     }
 }

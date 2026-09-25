@@ -3,6 +3,7 @@ using Drones.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace Drones.Model
         {
             this.X = x;
             this.Y = y;
-            this.Name = Name;
+            this.Name = name;
         }
 
 
@@ -42,14 +43,15 @@ namespace Drones.Model
 
             for (int i = 0; i < nb; i++)
             {
-                pizzerias.Add(new Pizzeria(RndValueHelpers.alea.Next(Config.AIRSPACE_WIDTH), RndValueHelpers.alea.Next(Config.AIRSPACE_HEIGHT), $"Pizzeria{i}"));
+                pizzerias.Add(new Pizzeria(RndValueHelpers.alea.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2), RndValueHelpers.alea.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2), $"Pizzeria{i}"));
             }
             return pizzerias;
         }
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Resources.Pizzeria, Convert.ToSingle(X) - 10, Convert.ToSingle(Y) - 10, 20, 20);
+            drawingSpace.Graphics.DrawImage(Resources.Pizzeria, Convert.ToSingle(X) - 10, Convert.ToSingle(Y) - 10, 50, 50);
+            drawingSpace.Graphics.DrawString($"{this.Name}", TextHelpers.drawFont, TextHelpers.writingBrush, Convert.ToSingle(_x + 5), Convert.ToSingle(_y - 25));
         }
 
     }
