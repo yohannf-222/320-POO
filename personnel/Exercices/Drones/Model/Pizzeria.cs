@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Drones.Model
 {
     public class Pizzeria
-    {
+    {        
         private int _x;
         private int _y;
         private string _name;
@@ -25,8 +25,32 @@ namespace Drones.Model
 
         private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
 
-        public int X { get => _x; set => _x = value; }
-        public int Y { get => _y; set => _y = value; }
+        public int X 
+        { 
+            get => _x; 
+            set 
+            { 
+                if (value >= Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2)
+                    _x = Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2;
+                else if (value <= Config.PIZZERIA_SIDE_LENGTH / 2)
+                    _x = Config.PIZZERIA_SIDE_LENGTH / 2;
+                else
+                    _x = value; 
+            } 
+        }
+        public int Y
+        {
+            get => _y;
+            set
+            {
+                if (value >= Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2)
+                    _y = Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2;
+                else if (value <= Config.PIZZERIA_SIDE_LENGTH / 2)
+                    _y = Config.PIZZERIA_SIDE_LENGTH / 2;
+                else
+                    _y = value;
+            }
+        }
         public string Name { get => _name; set => _name = value; }
 
 
@@ -50,8 +74,8 @@ namespace Drones.Model
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Resources.Pizzeria, Convert.ToSingle(X) - 10, Convert.ToSingle(Y) - 10, 50, 50);
-            drawingSpace.Graphics.DrawString($"{this.Name}", TextHelpers.drawFont, TextHelpers.writingBrush, Convert.ToSingle(_x + 5), Convert.ToSingle(_y - 25));
+            drawingSpace.Graphics.DrawImage(Resources.Pizzeria, Convert.ToSingle(X) - Config.PIZZERIA_SIDE_LENGTH / 2, Convert.ToSingle(Y) - Config.PIZZERIA_SIDE_LENGTH / 2, Config.PIZZERIA_SIDE_LENGTH, Config.PIZZERIA_SIDE_LENGTH);
+            drawingSpace.Graphics.DrawString($"{this.Name}", TextHelpers.drawFont, TextHelpers.writingBrush, Convert.ToSingle(_x + 10), Convert.ToSingle(_y - Config.PIZZERIA_SIDE_LENGTH / 2));
         }
 
     }
