@@ -27,7 +27,7 @@ namespace Drones.Model
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Resources.Charger, Convert.ToSingle(X) - 10, Convert.ToSingle(Y) - 10, Config.CHARGER_SIDE_LENGTH, Config.CHARGER_SIDE_LENGTH);            
+            drawingSpace.Graphics.DrawImage(Resources.Charger, Convert.ToSingle(X) - Config.CHARGER_SIDE_LENGTH/2, Convert.ToSingle(Y) - Config.CHARGER_SIDE_LENGTH / 2, Config.CHARGER_SIDE_LENGTH, Config.CHARGER_SIDE_LENGTH);            
         }
 
     }
