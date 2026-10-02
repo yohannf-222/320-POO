@@ -97,7 +97,7 @@ namespace Drones
             pizzerias.Add(pizzeria);
             return pizzerias;
         }
-        public static List<Client> RegisterCustomer(List<Client> customers)
+        public static List<Client> RegisterCustomer(List<Client> customers, List<Pizzeria> pizzerias)
         {
             Client customer = new Client(
                 RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.CLIENT_SIDE_LENGTH / 2),
@@ -106,10 +106,18 @@ namespace Drones
 
             for (int i = customers.Count - 1; i >= 0; i--)
             {
-                double deltaX = Math.Abs(customer.X - customers[i].X);
-                double deltaY = Math.Abs(customer.Y - customers[i].Y);
-                if (deltaX <= Config.CLIENT_SIDE_LENGTH && deltaY <= Config.CLIENT_SIDE_LENGTH)
-                    throw new Exception("Collision de client !");                
+                double deltaXCustomers = Math.Abs(customer.X - customers[i].X);
+                double deltaYCustomers = Math.Abs(customer.Y - customers[i].Y);
+                if (deltaXCustomers <= 5 * Config.CLIENT_SIDE_LENGTH && deltaYCustomers <=  5 * Config.CLIENT_SIDE_LENGTH)
+                    throw new Exception("Collision de clients !");                
+            }
+
+            for (int i = pizzerias.Count - 1; i >= 0; i--)
+            {
+                double deltaXCustomerPizzeria = Math.Abs(customer.X - pizzerias[i].X);
+                double deltaYCustomerPizzeria = Math.Abs(customer.Y - pizzerias[i].Y);
+                if (deltaXCustomerPizzeria <= Config.PIZZERIA_SIDE_LENGTH && deltaYCustomerPizzeria <= Config.PIZZERIA_SIDE_LENGTH)
+                    throw new Exception("Collision de clients avec une pizzeria!");
             }
             customers.Add(customer);
             return customers;
