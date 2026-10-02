@@ -97,6 +97,22 @@ namespace Drones
             pizzerias.Add(pizzeria);
             return pizzerias;
         }
-        
+        public static List<Client> RegisterCustomer(List<Client> customers)
+        {
+            Client customer = new Client(
+                RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.CLIENT_SIDE_LENGTH / 2),
+                RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.CLIENT_SIDE_LENGTH / 2),
+                $"Client {customers.Count + 1}");
+
+            for (int i = customers.Count - 1; i >= 0; i--)
+            {
+                double deltaX = Math.Abs(customer.X - customers[i].X);
+                double deltaY = Math.Abs(customer.Y - customers[i].Y);
+                if (deltaX <= Config.CLIENT_SIDE_LENGTH && deltaY <= Config.CLIENT_SIDE_LENGTH)
+                    throw new Exception("Collision de client !");                
+            }
+            customers.Add(customer);
+            return customers;
+        }
     }
 }

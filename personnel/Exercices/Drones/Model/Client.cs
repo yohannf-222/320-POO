@@ -59,13 +59,17 @@ namespace Drones.Model
         /// <returns></returns>
         public static List<Client> GenerateClients(int nb)
         {
-            if (nb > 50) nb = 50;
+            if (nb >= 50) nb = 50;
 
             List<Client> clients = new List<Client>();
 
             for (int i = 0; i < nb; i++)
             {
-                clients.Add(new Client(RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.CLIENT_SIDE_LENGTH / 2), RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.CLIENT_SIDE_LENGTH / 2), $"Client{i + 1}"));
+                try
+                {
+                    AirSpace.RegisterCustomer(clients);
+                }
+                catch { i--; }
             }
             return clients;
         }
