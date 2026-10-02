@@ -57,7 +57,7 @@ namespace Drones.Model
         /// </summary>
         /// <param name="nb"> le nombre de drones dans la liste</param>
         /// <returns></returns>
-        public static List<Client> GenerateClients(int nb, List<Pizzeria> pizzerias)
+        public static List<Client> GenerateClients(int nb, List<Pizzeria> pizzerias, Charger charger)
         {
             if (nb >= 50) nb = 50;
 
@@ -67,7 +67,7 @@ namespace Drones.Model
             {
                 try
                 {
-                    AirSpace.RegisterCustomer(clients, pizzerias);
+                    AirSpace.RegisterCustomer(clients, pizzerias, charger);
                 }
                 catch { i--; }
             }

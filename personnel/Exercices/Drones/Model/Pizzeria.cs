@@ -56,7 +56,7 @@ namespace Drones.Model
         /// </summary>
         /// <param name="nb"> le nombre de drones dans la liste</param>
         /// <returns></returns>
-        public static List<Pizzeria> GeneratePizzerias(int nb)
+        public static List<Pizzeria> GeneratePizzerias(int nb, Charger charger)
         {
             if (nb > 10) nb = 10;
 
@@ -66,7 +66,7 @@ namespace Drones.Model
             {
                 try
                 {
-                    AirSpace.RegisterPizzeria(pizzerias);
+                    AirSpace.RegisterPizzeria(pizzerias, charger);
                 }
                 catch { i--; }
             }

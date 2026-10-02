@@ -79,7 +79,7 @@ namespace Drones
             this.Render();
         }
 
-        public static List<Pizzeria> RegisterPizzeria(List<Pizzeria> pizzerias)
+        public static List<Pizzeria> RegisterPizzeria(List<Pizzeria> pizzerias, Charger charger)
         {
             Pizzeria pizzeria = new Pizzeria(
                 RndValueHelpers.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2),
@@ -94,10 +94,17 @@ namespace Drones
                     throw new Exception("Collision de Pizzerias !");                
             }
 
+            for (int i = pizzerias.Count - 1; i >= 0; i--)
+            {
+                double deltaXChargerCustomer = Math.Abs(pizzeria.X - charger.X);
+                double deltaYChargerCustomer = Math.Abs(pizzeria.Y - charger.Y);
+                if (deltaXChargerCustomer <= Config.CHARGER_SIDE_LENGTH && deltaYChargerCustomer <= Config.CHARGER_SIDE_LENGTH)
+                    throw new Exception("Collision de pizzeria avec la borne de charge!");
+            }
             pizzerias.Add(pizzeria);
             return pizzerias;
         }
-        public static List<Client> RegisterCustomer(List<Client> customers, List<Pizzeria> pizzerias)
+        public static List<Client> RegisterCustomer(List<Client> customers, List<Pizzeria> pizzerias, Charger charger)
         {
             Client customer = new Client(
                 RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.CLIENT_SIDE_LENGTH / 2),
@@ -118,6 +125,14 @@ namespace Drones
                 double deltaYCustomerPizzeria = Math.Abs(customer.Y - pizzerias[i].Y);
                 if (deltaXCustomerPizzeria <= Config.PIZZERIA_SIDE_LENGTH && deltaYCustomerPizzeria <= Config.PIZZERIA_SIDE_LENGTH)
                     throw new Exception("Collision de clients avec une pizzeria!");
+            }
+
+            for (int i = customers.Count - 1; i >= 0; i--)
+            {
+                double deltaXChargerCustomer = Math.Abs(customer.X - charger.X);
+                double deltaYChargerCustomer = Math.Abs(customer.Y - charger.Y);
+                if (deltaXChargerCustomer <= Config.CHARGER_SIDE_LENGTH && deltaYChargerCustomer <= Config.CHARGER_SIDE_LENGTH)
+                    throw new Exception("Collision de clients avec la borne de charge!");
             }
             customers.Add(customer);
             return customers;
