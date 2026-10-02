@@ -90,14 +90,13 @@ namespace Drones
             {
                 double deltaX = Math.Abs(pizzeria.X - pizzerias[i].X);
                 double deltaY = Math.Abs(pizzeria.Y - pizzerias[i].Y);
-                if (deltaX <= Config.PIZZERIA_SIDE_LENGTH || deltaY <= Config.PIZZERIA_SIDE_LENGTH)
-                {
-                    throw new Exception("Collision de Pizzerias !");
-                }
+                if (deltaX <= Config.PIZZERIA_SIDE_LENGTH && deltaY <= Config.PIZZERIA_SIDE_LENGTH)                
+                    throw new Exception("Collision de Pizzerias !");                
             }
 
             pizzerias.Add(pizzeria);
             return pizzerias;
         }
+        
     }
 }
