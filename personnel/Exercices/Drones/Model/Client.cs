@@ -72,8 +72,8 @@ namespace Drones.Model
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Resources.Pizzeria, Convert.ToSingle(X) - Config.CLIENT_SIDE_LENGTH / 2, Convert.ToSingle(Y) - Config.CLIENT_SIDE_LENGTH / 2, Config.CLIENT_SIDE_LENGTH, Config.CLIENT_SIDE_LENGTH);
-            drawingSpace.Graphics.DrawString($"{this.Name}", TextHelpers.drawFont, TextHelpers.writingBrush, Convert.ToSingle(_x + 5), Convert.ToSingle(_y - Config.CLIENT_SIDE_LENGTH / 2));
+            drawingSpace.Graphics.DrawImage(Resources.Client, Convert.ToSingle(X) - Config.CLIENT_SIDE_LENGTH / 2, Convert.ToSingle(Y) - Config.CLIENT_SIDE_LENGTH / 2, Config.CLIENT_SIDE_LENGTH, Config.CLIENT_SIDE_LENGTH);
+            //drawingSpace.Graphics.DrawString($"{this.Name}", TextHelpers.drawFont, TextHelpers.writingBrush, Convert.ToSingle(_x + 5), Convert.ToSingle(_y - Config.CLIENT_SIDE_LENGTH / 2));
         }
 
     }
