@@ -65,7 +65,7 @@ namespace Drones.Model
 
             for (int i = 0; i < nb; i++)
             {
-                clients.Add(new Client(RndValueHelpers.alea.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.CLIENT_SIDE_LENGTH / 2), RndValueHelpers.alea.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.CLIENT_SIDE_LENGTH / 2), $"Client{i + 1}"));
+                clients.Add(new Client(RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.CLIENT_SIDE_LENGTH / 2), RndValueHelpers.Next(Config.CLIENT_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.CLIENT_SIDE_LENGTH / 2), $"Client{i + 1}"));
             }
             return clients;
         }
