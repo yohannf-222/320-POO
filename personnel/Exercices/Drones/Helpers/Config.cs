@@ -17,6 +17,7 @@ namespace Drones.Helpers
 
         public static int PIZZERIA_SIDE_LENGTH = 50;
         public static int CLIENT_SIDE_LENGTH = 10;
+        public static int CHARGER_SIDE_LENGTH = 20;
 
     }
 }
