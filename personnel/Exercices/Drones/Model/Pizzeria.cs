@@ -64,7 +64,11 @@ namespace Drones.Model
 
             for (int i = 0; i < nb; i++)
             {
-                pizzerias.Add(new Pizzeria(RndValueHelpers.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2), RndValueHelpers.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2), $"Pizzeria{i + 1}"));
+                try
+                {
+                    AirSpace.RegisterPizzeria(pizzerias);
+                }
+                catch { i--; }
             }
             return pizzerias;
         }
@@ -72,7 +76,7 @@ namespace Drones.Model
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Resources.Pizzeria, Convert.ToSingle(X) - Config.PIZZERIA_SIDE_LENGTH / 2, Convert.ToSingle(Y) - Config.PIZZERIA_SIDE_LENGTH / 2, Config.PIZZERIA_SIDE_LENGTH, Config.PIZZERIA_SIDE_LENGTH);            
+            drawingSpace.Graphics.DrawImage(Resources.Pizzeria, Convert.ToSingle(X) - Config.PIZZERIA_SIDE_LENGTH / 2, Convert.ToSingle(Y) - Config.PIZZERIA_SIDE_LENGTH / 2, Config.PIZZERIA_SIDE_LENGTH, Config.PIZZERIA_SIDE_LENGTH);
             drawingSpace.Graphics.DrawString($"{this.Name}", TextHelpers.drawFont, TextHelpers.writingBrush, Convert.ToSingle(_x + 10), Convert.ToSingle(_y - Config.PIZZERIA_SIDE_LENGTH / 2));
         }
 

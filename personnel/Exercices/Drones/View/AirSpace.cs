@@ -1,3 +1,4 @@
+using Drones.Helpers;
 using Drones.Model;
 
 namespace Drones
@@ -76,6 +77,27 @@ namespace Drones
         {
             this.Update(ticker.Interval);
             this.Render();
+        }
+
+        public static List<Pizzeria> RegisterPizzeria(List<Pizzeria> pizzerias)
+        {
+            Pizzeria pizzeria = new Pizzeria(
+                RndValueHelpers.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_WIDTH - Config.PIZZERIA_SIDE_LENGTH / 2),
+                RndValueHelpers.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2),
+                $"Pizzeria {pizzerias.Count +1}");
+
+            for (int i = pizzerias.Count - 1; i >= 0; i--)
+            {
+                double deltaX = Math.Abs(pizzeria.X - pizzerias[i].X);
+                double deltaY = Math.Abs(pizzeria.Y - pizzerias[i].Y);
+                if (deltaX <= Config.PIZZERIA_SIDE_LENGTH || deltaY <= Config.PIZZERIA_SIDE_LENGTH)
+                {
+                    throw new Exception("Collision de Pizzerias !");
+                }
+            }
+
+            pizzerias.Add(pizzeria);
+            return pizzerias;
         }
     }
 }
