@@ -86,19 +86,25 @@ namespace Drones
                 RndValueHelpers.Next(Config.PIZZERIA_SIDE_LENGTH / 2, Config.AIRSPACE_HEIGHT - Config.PIZZERIA_SIDE_LENGTH / 2),
                 $"Pizzeria {pizzerias.Count +1}");
 
+            double deltaXPizzerias;
+            double deltaYPizzerias;
+
+            double deltaXChargerPizzeria;
+            double deltaYChargerPizzeria;
+
             for (int i = pizzerias.Count - 1; i >= 0; i--)
             {
-                double deltaX = Math.Abs(pizzeria.X - pizzerias[i].X);
-                double deltaY = Math.Abs(pizzeria.Y - pizzerias[i].Y);
-                if (deltaX <= Config.PIZZERIA_SIDE_LENGTH && deltaY <= Config.PIZZERIA_SIDE_LENGTH)                
+                deltaXPizzerias = Math.Abs(pizzeria.X - pizzerias[i].X);
+                deltaYPizzerias = Math.Abs(pizzeria.Y - pizzerias[i].Y);
+                if (deltaXPizzerias <= Config.PIZZERIA_SIDE_LENGTH && deltaYPizzerias <= Config.PIZZERIA_SIDE_LENGTH)                
                     throw new Exception("Collision de Pizzerias !");                
             }
 
             for (int i = pizzerias.Count - 1; i >= 0; i--)
             {
-                double deltaXChargerCustomer = Math.Abs(pizzeria.X - charger.X);
-                double deltaYChargerCustomer = Math.Abs(pizzeria.Y - charger.Y);
-                if (deltaXChargerCustomer <= Config.CHARGER_SIDE_LENGTH && deltaYChargerCustomer <= Config.CHARGER_SIDE_LENGTH)
+                deltaXChargerPizzeria = Math.Abs(pizzerias[i].X - charger.X);
+                deltaYChargerPizzeria = Math.Abs(pizzerias[i].Y - charger.Y);
+                if (deltaXChargerPizzeria <= Config.CHARGER_SIDE_LENGTH + Config.PIZZERIA_SIDE_LENGTH && deltaYChargerPizzeria <= Config.CHARGER_SIDE_LENGTH + Config.PIZZERIA_SIDE_LENGTH)
                     throw new Exception("Collision de pizzeria avec la borne de charge!");
             }
             pizzerias.Add(pizzeria);
